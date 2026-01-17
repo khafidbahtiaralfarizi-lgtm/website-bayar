@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Konfirmasi Pembayaran</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, sans-serif;
+}
+
+body{
+    background: linear-gradient(135deg,#232526,#414345);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.container{
+    background:#fff;
+    width:90%;
+    max-width:400px;
+    padding:20px;
+    border-radius:16px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.3);
+    text-align:center;
+}
+
+h1{
+    margin-bottom:8px;
+}
+
+.subtitle{
+    color:#555;
+    margin-bottom:20px;
+}
+
+.buttons{
+    display:flex;
+    gap:10px;
+}
+
+button{
+    flex:1;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    font-size:15px;
+    cursor:pointer;
+}
+
+.yes{
+    background:#25D366;
+    color:white;
+}
+
+.no{
+    background:#ff5252;
+    color:white;
+}
+
+.result{
+    margin-top:20px;
+    font-size:14px;
+}
+
+.upload-box{
+    margin-top:10px;
+}
+
+input[type="file"]{
+    width:100%;
+    margin-top:8px;
+}
+
+.link-btn{
+    display:block;
+    margin-top:12px;
+    padding:12px;
+    background:#25D366;
+    color:white;
+    border-radius:10px;
+    text-decoration:none;
+    pointer-events:none;
+    opacity:0.5;
+}
+
+.link-btn.active{
+    pointer-events:auto;
+    opacity:1;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Konfirmasi</h1>
+    <p class="subtitle">Apakah kamu sudah membayar?</p>
+
+    <div class="buttons">
+        <button class="yes" onclick="sudahBayar()">✅ Sudah</button>
+        <button class="no" onclick="belumBayar()">❌ Belum</button>
+    </div>
+
+    <div id="result" class="result"></div>
+</div>
+
+<script>
+function sudahBayar(){
+    document.getElementById("result").innerHTML = `
+        <p><strong>Ini barang kamu.</strong><br>
+        Makasih sudah membeli 🙏</p>
+        <a class="link-btn active" href="https://wa.me/6288994151483">
+            📦 Link Produk Kamu
+        </a>
+    `;
+}
+
+function belumBayar(){
+    document.getElementById("result").innerHTML = `
+        <p>Silakan lakukan pembayaran ke:</p>
+        <p><strong>No DANA : 085817434705</strong></p>
+        <p>Upload bukti pembayaran di bawah ini:</p>
+
+        <div class="upload-box">
+            <input type="file" accept="image/*" onchange="cekUpload(this)">
+        </div>
+
+        <a id="produk" class="link-btn" href="https://wa.me/6288994151483">
+            📦 Link Produk Kamu
+        </a>
+    `;
+}
+
+function cekUpload(input){
+    const link = document.getElementById("produk");
+    if(input.files.length > 0){
+        link.classList.add("active");
+    }else{
+        link.classList.remove("active");
+    }
+}
+</script>
+
+</body>
+</html>
